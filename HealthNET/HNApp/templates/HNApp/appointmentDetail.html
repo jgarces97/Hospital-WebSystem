@@ -1,0 +1,21 @@
+{% extends 'HNApp/base.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>{{ tool.date }}</h1>
+    <p>{{ tool.user }}</p>
+    <div>
+        {{ tool.time }}
+    </div>
+    <div>
+        {{ tool.doctorName }}
+    </div>
+    <div>
+        <a href="{% url 'editappointment' tool.id %}" class="btn btn-sm btn-warning">Edit</a>
+    </div>
+    <div>
+        <a href="{% url 'deleteappointment' tool.id %}" class="btn btn-sm btn-warning">Delete</a>
+    </div>
+    </div>
+
+{% endblock %}

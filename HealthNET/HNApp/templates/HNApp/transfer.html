@@ -1,0 +1,17 @@
+{% extends 'HNApp/base.html' %}
+{% include 'HNApp/form_template.html' %}
+<script>
+</script>
+{% block content %}
+    {% if not request.user.groups.first.name == 'patientGroup' %}
+        <div class="container">
+            <form enctype="multipart/form-data" action="" onsubmit="alert('Patient has been transferred.');"
+                  method="post">{% csrf_token %}
+                <br>{{ form.as_p }}
+                <input type="submit" value="Save"/>
+            </form>
+        </div>
+    {% else %}
+        <b>You do not have permission to do this</b>
+    {% endif %}
+{% endblock %}

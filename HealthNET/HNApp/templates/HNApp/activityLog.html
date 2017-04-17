@@ -1,0 +1,18 @@
+{% extends 'HNApp/base.html' %}
+{% load staticfiles %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'HNApp/style.css' %}" />
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Activity Log</title>
+</head>
+<body>
+<h1>Activity Log</h1>
+    {% for activity in activities %}
+        <li>{{ activity }}</li>
+    {% endfor %}
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'HNApp/base.html' %}
+{% block content %}
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Username (Profile)</th>
+                <th>Name</th>
+                <th>Doctor</th>
+                <th>Hospital</th>
+                <th>Electronic Medical Record</th>
+                <th>Prescriptions</th>
+                <th>Admit/Discharge</th>
+                <th>Transfer</th>
+            </thead>
+            <tbody>
+            </tr>
+            {% for patient in patients %}
+                <tr>
+                    <td><a href="{% url 'medicalProfile' patient.id %}">{{ patient.user.username }}</a></td>
+                    <td>{{ patient.user.first_name }} {{ patient.user.last_name }}</td>
+                    <td>{{ patient.doctor }}</td>
+                    <td>{{ patient.hospital }}</td>
+                    <td> LINK TO EMR </td>
+                    <td> <a href="{% url 'viewPrescriptions' patient.id %}" class="btn btn-default">Prescriptions</a></td>
+                    <td> <a href="{% url 'admitDischarge' %}?patient={{ patient.user.username }}" class="btn btn-default">
+                        {% if patient.medicalProfile.isAdmitted %}Discharge{% else %}Admit{% endif %}</a></td>
+                    <td> <a href="{% url 'transfer' patient.id %}" class="btn btn-default">Transfer</a></td> </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

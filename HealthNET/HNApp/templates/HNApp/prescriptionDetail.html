@@ -1,0 +1,30 @@
+{% extends 'HNApp/base.html' %}
+{% block content %}
+
+    <div class="container">
+        <h1>Prescriptions</h1>
+        {% if request.user.groups.first.name == 'workerGroup' or request.user.groups.first.name == 'adminGroup' %}
+            {% if inList or request.user.groups.first.name == 'adminGroup' %}
+                {% for p in prescList %}
+                    <li> {{ p }}</li>
+                {% endfor %}
+                <br><br>
+                <div>
+                    <a href={% url 'addPrescription' %}?patient={{ patient.user.username }} class="btn btn-default">Add a prescription</a>
+                </div>
+            {% else %}
+                <b>This is not your patient</b>
+            {% endif %}
+        {% endif %}
+        {% if request.user.groups.first.name == 'patientGroup' %}
+            {% if request.user.user.id == patient.id %}
+                {% for p in prescList %}
+                    <li> {{ p }}</li>
+                {% endfor %}
+            {% else %}
+                <b>You may not view this patient's prescriptions</b>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock %}

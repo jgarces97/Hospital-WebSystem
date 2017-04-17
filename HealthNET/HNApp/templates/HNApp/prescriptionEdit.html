@@ -1,0 +1,13 @@
+{% extends 'HNApp/base.html' %}
+{% block content %}
+    {% if request.user.groups.first.name == 'workerGroup' %}
+        <div class="container">
+            <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save"/>
+            </form>
+        </div>
+    {% else %}
+        You do not have permission to do this.
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% csrf_token %}
+{% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'HNApp/style.css' %}" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admit/Discharge</title>
+</head>
+<body>
+{% if admitited %}
+    <div> <br><b>{{ patient.user.first_name }} {{ patient.user.last_name }}</b> has been <b>admitted</b> to <b>{{ hospital.name }}</b></div>
+    <div> <br><a href="/patientList"> Return to the patient list.</a></div>
+{% else %}
+    <div> <br><b>{{ patient.user.first_name }} {{ patient.user.last_name }}</b> has been <b>discharged</b> from <b>{{ hospital.name }}</b></div>
+    <div> <br><a href="/patientList"> Return to the patient list.</a></div>
+{% endif %}
+
+</body>
+</html>

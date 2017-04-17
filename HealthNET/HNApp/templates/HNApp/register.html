@@ -1,0 +1,264 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>Register | HealthNet</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.continue').click(function () {
+                $('.nav-tabs > .active').next('li').find('a').trigger('click');
+            });
+            $('.previous').click(function () {
+                $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+            });
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="{% static 'HNApp/style.css' %}"/>
+</head>
+
+<body>
+<h1 class="text-center">Register with HealthNet</h1>
+
+{% if patient_form.errors or user_form.errors %}
+    <script>
+        alert('There appears to be some invalid fields!');
+    </script>
+{% endif %}
+
+{% if registered %}
+    <strong>Thank you for registering!</strong>
+    <a href="/">Return to the homepage.</a><br/>
+{% else %}
+    <br><br>
+
+    <div class="container">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a data-toggle="tab" href="#step1">Step 1</a></li>
+            <li><a data-toggle="tab" href="#step2">Step 2</a></li>
+            <li><a data-toggle="tab" href="#step3">Step 3</a></li>
+            <li><a data-toggle="tab" href="#step4">Step 4</a></li>
+        </ul>
+
+
+        <form id="user_form" method="post" action="" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            <div class="tab-content">
+                <br><br>
+
+
+                <div id="step1" class="tab-pane fade in active">
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.insurance.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.insurance.errors }}</small></span>
+                        </div>
+                        {{ patient_form.insurance }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div style="position:absolute; left:50px;">
+                        <br>
+                        <a class="btn btn-default align-left continue">Continue >></a>
+                        <br><br><br><br>
+                        <a class="btn btn-default align-left" href="\">Return Home</a>
+                    </div>
+                </div>
+
+                <div id="step2" class="tab-pane fade">
+
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.hospital.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.hospital.errors }}</small></span>
+                        </div>
+                        {{ patient_form.hospital }}
+                    </div>
+
+                    <br><br><br><br>
+
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.doctor.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.doctor.errors }}</small></span>
+                        </div>
+                        {{ patient_form.doctor }}
+                    </div>
+                    <div>
+                        <br><br><br><br>
+                        <div style="position:absolute; left:50px;">
+                            <a class="btn btn-default align-left continue">Continue >></a>
+                            <br><br>
+                            <a class="btn btn-default align-left previous"><< Previous</a>
+                            <br><br><br><br>
+                            <a class="btn btn-default align-left" href="\">Return Home</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step3" class="tab-pane fade">
+                    <div class="form-group" style="position:absolute; left:50px;">
+                        <label>{{ patient_form.street_Address.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.street_Address.errors }}</small></span>
+                        </div>
+                        {{ patient_form.street_Address }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div class="form-group" style="position:absolute; left:50px;">
+                        <label>{{ patient_form.city.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.city.errors }}</small></span>
+                        </div>
+                        {{ patient_form.city }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.state.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.state.errors }}</small></span>
+                        </div>
+                        {{ patient_form.state }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.zip_Code.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.zip_Code.errors }}</small></span>
+                        </div>
+                        {{ patient_form.zip_Code }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.phone_Number.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.phone_Number.errors }}</small></span>
+                        </div>
+                        {{ patient_form.phone_Number }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.date_of_birth.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.date_of_birth.errors }}</small></span>
+                        </div>
+                        {{ patient_form.date_of_birth }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.emergency_contact_name.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.emergency_contact_name.errors }}</small></span>
+                        </div>
+                        {{ patient_form.emergency_contact_name }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.emergency_contact_email.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.emergency_contact_email.errors }}</small></span>
+                        </div>
+                        {{ patient_form.emergency_contact_email }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ patient_form.emergency_contact_phone_number.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ patient_form.emergency_contact_phone_number.errors }}</small></span>
+                        </div>
+                        {{ patient_form.emergency_contact_phone_number }}
+                    </div>
+
+                    <br><br><br><br>
+                    <div style="position:absolute; left:50px;">
+                        <a class="btn btn-default align-left continue">Continue >></a>
+                        <br><br>
+                        <a class="btn btn-default align-left previous"><< Previous</a>
+                        <br><br><br><br>
+                        <a class="btn btn-default align-left" href="\">Return Home</a>
+                    </div>
+                </div>
+
+                <div id="step4" class="tab-pane fade">
+
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ user_form.first_name.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ user_form.first_name.errors }}</small></span>
+                        </div>
+                        {{ user_form.first_name }}
+                    </div>
+
+                    <br><br><br><br>
+
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ user_form.last_name.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ user_form.last_name.errors }}</small></span>
+                        </div>
+                        {{ user_form.last_name }}
+                    </div>
+
+                    <br><br><br><br>
+
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>Email:</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ user_form.username.errors }}</small></span>
+                        </div>
+                        {{ user_form.username }}
+                    </div>
+
+                    <br><br><br><br>
+
+                    <div class="form-group" style="position:absolute; left:50px;">
+
+                        <label>{{ user_form.password.label_tag }}</label>
+                        <div>
+                            <span class="text-danger small"><small>{{ user_form.password.errors }}</small></span>
+                        </div>
+                        {{ user_form.password }}
+                    </div>
+                    <br><br><br><br>
+
+                    <br>
+                    <div style="position:absolute; left:50px;">
+                        <a class="btn btn-default align-left previous"><< Previous</a>
+                        <br><br>
+                        <input type="submit" name="submit" value="Complete Registration"/>
+                        <br><br><br><br>
+                        <a class="btn btn-default align-left" href="\">Return Home</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endif %}
+</body>
+</html>

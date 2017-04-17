@@ -1,0 +1,27 @@
+<style>
+    div.center {
+        margin-left: auto;
+        margin-right: auto;
+        width:13em;
+    }
+</style>
+{% extends 'HNApp/base.html' %}
+
+{% block content %}
+        {% if created %}
+        <strong>Appointment created!</strong>
+        <a href="/dashboard/">Return to the dashboard.</a><br />
+{% else %}
+<div class="center">
+    <form id="user_form" method="post" action="" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ apptEventForm.as_p}}
+        <label for="date">Date: </label>
+        <p><input id="date" input type="text" id="datepicker" value="{{ apptEventForm.date }}"></p>
+        <p>Date: <input id="time" input type="time"></p>
+	<br><br><input type="submit" value="submit" href="/dashboard/">
+    </form>
+</div>
+{% endif %}
+{% endblock %}

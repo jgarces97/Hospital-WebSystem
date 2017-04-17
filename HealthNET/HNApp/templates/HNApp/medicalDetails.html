@@ -1,0 +1,44 @@
+{% extends 'HNApp/base.html' %}
+{% block content %}
+    <head>
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            li {
+                display: inline;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <h2>
+            <div>
+                {% csrf_token %}
+                {{ patient.user.first_name }}
+                {{ patient.user.last_name }}
+                <br>
+            </div>
+        </h2>
+                {% include 'HNApp/form_template.html' %}
+                <div><br>
+                    <b><h3><u>Medical Information</u></h3></b>
+                    <br>
+                    <p><h4><b>Height</b></h4> {{ patient.medicalProfile.height }} </p>
+                    <p><h4><b>Weight</b></h4> {{ patient.medicalProfile.weight }} </p>
+                    <p><h4><b>Gender</b></h4> {{ patient.medicalProfile.gender }} </p>
+                    <p><h4><b>Blood Type</b></h4> {{ patient.medicalProfile.blood_type }} </p>
+
+                 {% if request.user.groups.first.name == 'workerGroup' %}
+                    <a href="{% url 'medicalEdit' id %}" class="btn btn-default">Edit</a>
+                 {% endif %}
+                </div>
+                <br>
+            </div>
+
+    </body>
+{% endblock %}
+

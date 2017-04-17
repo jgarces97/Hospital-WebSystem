@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="{% static 'HNApp/style.css' %}"/>
+<html>
+<head>
+    <title>Login | HealthNet</title>
+</head>
+
+<body>
+<h1>Login to HealthNet</h1>
+{% if invalid %}
+    <b>Invalid login details supplied.</b><br><br>
+    <a class="btn btn-default align-left" href="\login\">Return to login</a>
+{% else %}
+    <br>
+    <form id="login_form" method="post" action="">
+        {% csrf_token %}
+        Email: <input type="text" name="username" value="" size="50"/>
+        <br>
+        <br>
+        Password: <input type="password" name="password" value="" size="50"/>
+        <br>
+        <br>
+
+        <input type="submit" value="Submit"/>
+        <br><br><br><br>
+        <a class="btn btn-default align-left" href="\">Return Home</a>
+    </form>
+{% endif %}
+</body>
+</html>

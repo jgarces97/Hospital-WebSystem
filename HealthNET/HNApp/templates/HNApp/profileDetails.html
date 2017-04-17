@@ -1,0 +1,58 @@
+{% extends 'HNApp/base.html' %}
+{% block content %}
+<head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h2><center>
+        <div>
+            {% csrf_token %}
+            {{user.first_name}}
+            {{user.last_name}}
+            <br>
+            {% include 'HNApp/form_template.html' %}
+        </div>
+        </center></h2>
+        <br>
+        <div>
+            <u><b><h3>Personal Information</h3></b></u>
+            <p><h4><b>First Name</b></h4> {{ user.first_name }} </p>
+            <p><h4><b>Last Name</b></h4> {{ user.last_name }} </p>
+            <p><h4><b>Date of Birth</b></h4> {{ user.user.date_of_birth }} </p>
+
+        </div>
+        <br>
+        <div>
+            <u><b><h3>Contact Information</h3></b></u>
+
+            <p><h4><b>Phone Number</b></h4> {{ user.user.phone_Number }} </p>
+            <h4><b>Street Address</b></h4>{{ user.user.street_Address }},
+            {{ user.user.city }}
+            {{ user.user.state }},
+            {{ user.user.zip_Code }}
+            <p><h4><b>Hospital</b></h4> {{ user.user.hospital }} </p>
+            <p><h4><b>Doctor</b></h4> {{ user.user.doctor }} </p>
+        </div>
+        <br>
+        <div>
+            <u><b><h3>Emergency Contact</h3></b></u>
+            <p><h4><b>Contact Name</b></h4> {{ user.user.emergency_contact_name }} </p>
+            <p><h4><b>Contact Email</b></h4> {{ user.user.emergency_contact_email }} </p>
+            <p><h4><b>Contact Phone Number</b></h4> {{ user.user.emergency_contact_phone_number }} </p>
+        </div>
+        <br>
+        <a href="{% url 'edit' user.user.id %}" class="btn btn-default">Edit</a>
+    </div>
+</body>
+{% endblock %}

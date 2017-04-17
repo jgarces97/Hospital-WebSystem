@@ -1,0 +1,44 @@
+{% extends 'HNApp/base.html' %}
+{% load fullcalendar_tags %}
+
+{% block content %}
+
+    <head>
+        <title>HealthNet</title>
+    </head>
+
+
+    <body>
+    <div style="position:absolute; left:50px;">
+        <div>
+            {% if admin %}
+                <h1>Pending Workers</h1>
+                <h4>Click to verify</h4>
+                <div>
+                    {% if workerObjects %}
+                        {% for worker in workerObjects %}
+                            <li>{{ worker.user.first_name }} {{ worker.user.last_name }}: <a
+                                    href="{% url 'verify' %}?worker={{ worker.user.username }}">{{ worker.user.username }}</a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <div>No workers to be verified at the moment.</div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <h1>Appointments</h1>
+            <br><br>
+            <div>
+                <a href="/createappointment/" class="btn btn-default">Create an appointment</a>
+            </div>
+            <br><br>
+
+        </div>
+        <div style="width: 500px">
+            {% calendar %}
+        </div>
+    </div>
+
+    </body>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'HNApp/base.html' %}
+{% block content %}
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Add Doctors/Nurses</th>
+            </thead>
+            <tbody>
+            </tr>
+            {% for worker in workers %}
+                <tr>
+                    <td>{{ worker.user.username }}</td>
+                    <td>{{ worker.user.first_name }} {{ worker.user.last_name }}</td>
+                    <td> ADD DOCTOR/NURSE BUTTON</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
